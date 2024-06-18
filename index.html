@@ -236,14 +236,10 @@
 
             <p>
               We train a vision-language-action policy (VLA) to autoregressively generate textual reasoning (the
-              "embodied chain of thought", or ECoT) in response
-              to commands and observations before it chooses a robot action. Specifically, the model takes in an
-              embedded image and tokenized instruction, then generates a (potentially-rephrased) summary of the task, a
-              list of sub-tasks constituting a plan for accomplishing the task, natural language reasoning about which
-              sub-task and general movement should be executed, the gripper pixel coordinates, and object bounding
-              boxes, all before producing an action. We consider the latter three (movements, gripper position, and
-              bounding boxes) are <i>embodied</i> reasoning steps: low-level, spatially-grounded features that encourage
-              our policy to "look carefully," while the other steps cause it to "think carefully."
+              "embodied chain of thought", or ECoT) in response to commands and observations before it chooses a robot
+              action. Such reasoning contains high-level reasoning steps (task, plan, and sub-task) to encourage the
+              model to "think carefully" and low-level features (movement, gripper position, and labeled object bounding
+              boxes) to get the model to "look carefully."
             </p>
             <p>
               Our ECoT policy is built atop <a href="https://openvla.github.io/">OpenVLA</a>, which fine-tunes a <a
@@ -298,26 +294,29 @@
                     </div>
                   </div>
                   <p>
-                    We expect that our ECoT policy's ability to textually reason and explicitize embodied
-                    spatio-semantic
-                    features would allow it to perform better at tasks involving novel objects or commands. We thus
-                    construct a suite of primarily out-of-distribution evaluation tasks to test this hypothesis. We
-                    compare our policy against several baselines: <a href="https://openvla.github.io/">OpenVLA</a>, the
-                    open-source VLA policy we build upon; <a
+                    We construct a suite of evaluation tasks to test how well ECoT deals with novel objects,
+                    instructions, and spatial relations. We
+                    compare our policy against several baselines: <a href="https://openvla.github.io/">OpenVLA</a>, <a
                       href="https://deepmind.google/discover/blog/scaling-up-learning-across-many-different-robot-types/">RT-2-X</a>,
-                    a closed-source VLA trained on more diverse data than our policy; and a naive chain-of-thought VLA
+                    and a naive chain-of-thought VLA
                     that only reasons about high-level plans and sub-tasks, without any embodied reasoning steps.
                   </p>
                   <p>
-                    We find that TODO
+                    We find that our ECoT policy outperforms all baseline approaches. TODO
                   </p>
                   <img src="static/images/ecot_quali_examples/ecot_quali_examples-1.png" />
-                  <p style="text-align: center;"><small>Some qualitative example ECoT generations. Left: high-level
-                      reasoning and low-level object
-                      segmentations are correct, leading to a successful rollout. Middle: the command is correctly
-                      rephrased to refer to specific objects. Right: the hammer is incorrectly identified as a
-                      screwdriver, causing the robot to take
-                      inappropriate actions.</small></p>
+                  <p style="text-align: center;"><small>Some example ECoT generations. Left and middle are
+                      from successful trajectories, while right is from a failed one.</small></p>
+                  We also find that the generated reasonings can give qualitative interpretability
+                  insights into why the policy succeeds or fails at a given task. In the left-side example above, the
+                  high-level reasoning and
+                  low-level detections are all correct, leading to a successful trajectory. In the middle example, the
+                  model correctly rephrases the task ("put the leftmost object on the middle object") to be more
+                  specific ("put the pink stuffed animal on the blue towel"); this is an emergent behavior, as we do not
+                  typically train on rephrasings of this type. Finally, in the right-side example, we see that the
+                  policy
+                  incorrectly identifies the hammer as a screwdriver, which explains why the robot wrongly reached
+                  for it.
                 </div>
 
                 <h3 class="title is-4">Human Interventions via Natural Language Corrections</h3>
@@ -330,9 +329,9 @@
                     </div>
                   </div>
                   <p>
-                    Embodied chain-of-thought reasoning open a new approach for human-robot interaction: since ECoT
-                    policies pick their action based on their generated textual reasoning, human operators can interpret
-                    and change the robot's "thought process." Specifically, operators can issue natural language hints
+                    Embodied chain-of-thought reasoning open a new approach for human-robot interaction: human operators
+                    can interpret
+                    and debug the robot's "thought process" by issuing natural language hints
                     or corrections, which a large language model (like <a
                       href="https://openai.com/chatgpt/">ChatGPT</a>) can format into an ECoT reasoning text. The ECoT
                     policy can then condition on this fixed reasoning to pick actions.
