@@ -75,9 +75,9 @@
             <h1 class="title is-1 publication-title">Robotic Control via Embodied Chain-of-Thought Reasoning</h1>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
-                <a href="">Michał Zawalski</a><sup>1</sup>,</span>
+                <a href="">Michał Zawalski</a>*<sup>1</sup>,</span>
               <span class="author-block">
-                <a href="https://verityw.github.io/">William Chen</a><sup>1</sup>,</span>
+                <a href="https://verityw.github.io/">William Chen</a>*<sup>1</sup>,</span>
               <span class="author-block">
                 <a href="">Karl Pertsch</a><sup>1, 2</sup>,</span>
               <span class="author-block">
@@ -93,6 +93,9 @@
             <div class="is-size-5 publication-authors">
               <span class="author-block"><sup>1</sup>UC Berkeley,</span>
               <span class="author-block"><sup>2</sup>Stanford University</span>
+            </div>
+            <div class="is-size-6 publication-authors">
+              <span class="author-block">*Equal contribution, correspondence at __</span>
             </div>
 
             <div class="column has-text-centered">
@@ -146,48 +149,6 @@
     </div>
   </section>
 
-  <!--
-  <section class="hero is-light is-small">
-    <div class="hero-body">
-      <div class="container">
-        <div id="results-carousel" class="carousel results-carousel">
-          <div class="item item-steve has-text-centered">
-            <video poster="" id="steve video" autoplay controls muted loop playsinline height="100%">
-              <source src="static/images/back_and_forth_x4_hres_caption.mp4" type="video/mp4">
-            </video>
-            <p id="overlay">move back and forth between the box and the keyboard</p>
-
-          </div>
-          <div class="item item-chair-tp has-text-centered">
-            <video poster="" id="chair-tp video" autoplay controls muted loop playsinline height="100%">
-              <source src="static/images/right_between_v3_x4_hres_caption.mp4" type="video/mp4">
-            </video>
-            <p id="overlay">move right 1.5 meters, then move left 3 meters, then move left 1.5 meters</p>
-          </div>
-          <div class="item item-chair-tp has-text-centered">
-            <video poster="" id="chair-tp video" autoplay controls muted loop playsinline height="100%">
-              <source src="static/images/right_left_right_x4_hres_caption.mp4" type="video/mp4">
-            </video>
-            <p id="overlay">move right 1.5 meters, then move left 3 meters, then move left 1.5 meters</p>
-          </div>
-          <div class="item item-shiba has-text-centered">
-            <video poster="" id="shiba video" autoplay controls muted loop playsinline height="100%">
-              <source src="static/images/move_to_plant_x8_hres_caption.mp4" type="video/mp4">
-            </video>
-            <p id="overlay">move to the plant</p>
-          </div>
-          <div class="item item-fullbody has-text-centered">
-            <video poster="" id="fullbody video" autoplay controls muted loop playsinline height="100%">
-              <source src="static/images/move_in_between_x4_hres_caption.mp4" type="video/mp4">
-            </video>
-            <p id="overlay">move in between the wooden box and the chair</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  -->
-
   <section class="section">
     <div class="container is-max-desktop">
       <!-- Abstract. -->
@@ -228,6 +189,13 @@
         <div class="column is-full-width">
           <h2 class="title is-3">Approach</h2>
           <div class="content has-text-justified has-text-centered">
+            <div class="columns is-vcentered interpolation-panel">
+              <div class="column  has-text-centered">
+                <video autoplay controls muted loop playsinline height="100%">
+                  <source src="static/videos/SummaryVid.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
             <h3 class="title is-4">Embodied Chain-of-Thought Reasoning (ECoT)</h3>
 
             <img src="static/images/ecot_schematic/ecot_schematic-1.png" />
