@@ -95,7 +95,13 @@
               <span class="author-block"><sup>2</sup>Stanford University</span>
             </div>
             <div class="is-size-6 publication-authors">
-              <span class="author-block">*Equal contribution, correspondence at __</span>
+              <span class="author-block">*Equal contribution
+              </span>
+            </div>
+            <div class="is-size-6 publication-authors">
+              <span class="author-block">Correspondence at m.zawalski [at] uw.edu.pl and verityw
+                [at] berkeley.edu.
+              </span>
             </div>
 
             <div class="column has-text-centered">
@@ -140,10 +146,11 @@
     <div class="container is-max-desktop">
       <div class="hero-body">
         <video id="teaser" autoplay controls muted loop playsinline height="100%">
-          <source src="static/videos/SummaryVid.mp4" type="video/mp4">
+          <source src="static/videos/Teaser.mp4" type="video/mp4">
         </video>
         <h2 class="subtitle has-text-centered">
-          Embodied Chain-of-Thought Reasoning enables robots to textually reason about their task and actions.
+          Embodied Chain-of-Thought Reasoning enables robots to textually reason about their task, observations, and
+          actions.
         </h2>
       </div>
     </div>
@@ -257,14 +264,54 @@
                   <div class="columns is-vcentered interpolation-panel">
                     <div class="column  has-text-centered">
                       <video autoplay controls muted loop playsinline height="100%">
-                        <source src="static/videos/Example_Mushroom_To_Tape.mp4" type="video/mp4">
+                        <source src="static/videos/demos/put-the-mushroom-in-the-metal-pot.mp4" type="video/mp4">
                       </video>
+                      <p>"Put the mushroom in the metal pot"</p>
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/demos/put-the-carrot-on-the-plate.mp4" type="video/mp4">
+                      </video>
+                      <p>"Put the carrot on the plate"</p>
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/demos/put-the-rightmost-object-on-the-middle-object.mp4"
+                          type="video/mp4">
+                      </video>
+                      <p>"Put the rightmost object on the middle object"</p>
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/demos/put-the-mushroom-in-the-rightmost-container.mp4"
+                          type="video/mp4">
+                      </video>
+                      <p>"Put the mushroom in the rightmost container"</p>
                     </div>
+
+                    <div class="column  has-text-centered">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/demos/place-the-watermelon-on-the-towel.mp4" type="video/mp4">
+                      </video>
+                      <p>"Place the watermelon on the towel"</p>
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/demos/move-the-mushroom-to-the-measuring-tape.mp4" type="video/mp4">
+                      </video>
+                      <p>"Move the mushroom the the measuring tape"</p>
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/demos/put-the-edible-object-in-the-bowl.mp4" type="video/mp4">
+                      </video>
+                      <p>"Put the edible object in the bowl"</p>
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/demos/put-the-object-used-for-drinking-on-the-towel.mp4"
+                          type="video/mp4">
+                      </video>
+                      <p>"Put the object used for drinking on the towel"</p>
+                    </div>
+
+
                   </div>
+
                   <p>
-                    We construct a suite of evaluation tasks to test how well ECoT deals with novel objects,
+                    We construct a suite of 14 evaluation tasks with 314 total trials to test how well ECoT deals with
+                    novel objects,
                     instructions, and spatial relations. We
-                    compare our policy against several baselines: <a href="https://openvla.github.io/">OpenVLA</a>, <a
+                    compare our policy against several baselines: <a href="https://octo-models.github.io/">Octo</a>, <a
+                      href="https://openvla.github.io/">OpenVLA</a>, <a
                       href="https://deepmind.google/discover/blog/scaling-up-learning-across-many-different-robot-types/">RT-2-X</a>,
                     and a naive chain-of-thought VLA
                     that only reasons about high-level plans and sub-tasks, without any embodied reasoning steps.
