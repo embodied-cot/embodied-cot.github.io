@@ -309,7 +309,7 @@
                       href="https://deepmind.google/discover/blog/scaling-up-learning-across-many-different-robot-types/">RT-2-X</a>.
                   </p>
 
-                  <img src="static/images/ecot-success-rates.png" />
+                  <img src="static/images/ecot_success_rates/ecot_success_rates-1.png" />
                   <p style="text-align: center;"><small>Evaluation success rates of our ECoT policy compared against
                       several popular generalist robot policies.</small></p>
                   <p>
@@ -345,7 +345,7 @@
                       href="https://openai.com/chatgpt/">ChatGPT</a>) can format into an ECoT reasoning text. The ECoT
                     policy can then condition on this fixed reasoning to pick actions.
                   </p>
-                  <img src="static/images/ecot_human_intervention/ecot_human_intervention-1.png" />
+                  <img src="static/images/ecot_interventions/ecot_interventions-1.png" />
                   <p style="text-align: center;"><small>Embodied chain-of-thought reasoning enables policies to accept
                       natural language corrections and hints.</small></p>
                   <p>
@@ -358,9 +358,9 @@
                 <h3 class="title is-4">Transfer to Other Robot Embodiments</h3>
                 <div class="content has-text-justified">
 
-                  <img src="static/images/reasoning_on_other_embodiments.png" />
+                  <img src="static/images/ecot_other_embs/ecot_other_embs-1.png" />
                   <p style="text-align: center;"><small>Example of our policy generating reasoning for novel robot
-                      embodiments, both real and simulated.</small></p>
+                      embodiments.</small></p>
                   <p>
                   <p>
                     Finally, we find that fine-tuning an OpenVLA policy on our ECoT Bridge V2 data <b>allows it to
@@ -369,6 +369,7 @@
                     highly robot-dependent embodied features, such as the gripper position.
                   </p>
 
+                  <!--
                   <div class="columns is-vcentered interpolation-panel">
                     <div class="column  has-text-centered">
                       <video autoplay controls muted loop playsinline height="100%">
@@ -394,6 +395,7 @@
                     Based on these findings, we believe embodied chain-of-thought to be a promising recipe for scaling
                     and transfering robot reasoning capabilities.
                   </p>
+                  -->
                 </div>
 
                 <!--
@@ -425,9 +427,15 @@ Example Code
       <section class="section" id="BibTeX">
         <div class="container is-max-desktop content">
           <h2 class="title">BibTeX</h2>
-          <pre><code> @article{Zawalski24-ecot,
+          <!--<pre><code> @article{Zawalski24-ecot,
             title={Robotic Control via Embodied Chain-of-Thought Reasoning},
             author={Zawalski, Michał and Chen, William and Pertsch, Karl and Mees, Oier 
+                and Finn, Chelsea and Levine, Sergey},
+            year={2024}
+          } </code></pre>-->
+          <pre><code> @article{Zawalski24-ecot,
+            title={Robotic Control via Embodied Chain-of-Thought Reasoning},
+            author={Zawalski, Micha\l{} and Chen, William and Pertsch, Karl and Mees, Oier 
                 and Finn, Chelsea and Levine, Sergey},
             year={2024}
           } </code></pre>
