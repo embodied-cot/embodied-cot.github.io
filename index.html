@@ -196,6 +196,7 @@
         <div class="column is-full-width">
           <h2 class="title is-3">Approach</h2>
           <div class="content has-text-justified has-text-centered">
+            <!--
             <div class="columns is-vcentered interpolation-panel">
               <div class="column  has-text-centered">
                 <video autoplay controls muted loop playsinline height="100%">
@@ -203,6 +204,7 @@
                 </video>
               </div>
             </div>
+            -->
             <h3 class="title is-4">Embodied Chain-of-Thought Reasoning (ECoT)</h3>
 
             <img src="static/images/ecot_schematic/ecot_schematic-1.png" />
@@ -228,16 +230,7 @@
             <p>
               To train our policies to perform embodied chain-of-thought reasoning, we create a synthetic data
               generation pipeline that leverages numerous foundation models to extract features from robot
-              demonstrations to put into corresponding textual reasoning chains. Specifically, we make use of <a
-                href="https://github.com/TRI-ML/prismatic-vlms">Prismatic VLMs</a> to caption demonstration scenes; <a
-                href="https://github.com/IDEA-Research/GroundingDINO">Grounding DINO</a> to produce bounding boxes
-              labeled with entities mentioned in said caption; a hard-coded Python function to convert proprioception to
-              textual motion primitives; <a href="https://github.com/inuwamobarak/OWLv2">OWLv2</a> and <a
-                href="https://segment-anything.com/">SAM</a> to get the robot gripper position; and <a
-                href="https://gemini.google.com/"> Gemini</a> to convert the task instruction, scene description, and
-              motion primitives into dense labels for the plan, subtasks, and motion reasonings.
-            </p>
-            <p>
+              demonstrations to put into corresponding textual reasoning chains.
               We use this pipeline on
               the <a href="https://github.com/rail-berkeley/bridge_data_v2">Bridge V2</a> robot demonstration dataset to
               produce the embodied chain-of-thought data for training our policy.
@@ -307,31 +300,30 @@
                   </div>
 
                   <p>
-                    We construct a suite of 14 evaluation tasks with 314 total trials to test how well ECoT deals with
+                    We construct a suite of 14 evaluation tasks to test how well ECoT deals with
                     novel objects,
                     instructions, and spatial relations. We
                     compare our policy against several baselines: <a href="https://octo-models.github.io/">Octo</a>, <a
-                      href="https://openvla.github.io/">OpenVLA</a>, <a
-                      href="https://deepmind.google/discover/blog/scaling-up-learning-across-many-different-robot-types/">RT-2-X</a>,
-                    and a naive chain-of-thought VLA
-                    that only reasons about high-level plans and sub-tasks, without any embodied reasoning steps.
+                      href="https://openvla.github.io/">OpenVLA</a>, and <a
+                      href="https://deepmind.google/discover/blog/scaling-up-learning-across-many-different-robot-types/">RT-2-X</a>.
                   </p>
+
+                  <img src="static/images/ecot-success-rates.png" />
+                  <p style="text-align: center;"><small>Evaluation success rates of our ECoT policy compared against
+                      several popular generalist robot policies.</small></p>
                   <p>
-                    We find that our ECoT policy outperforms all baseline approaches. TODO
+                  <p>
+                    After running <b>over 300 real-world evaluation trials per policy</b>, we find that our embodied
+                    chain-of-thought policy yields the best performance, especially on tasks that require spatial
+                    understanding and semantic generalization.
                   </p>
                   <img src="static/images/ecot_quali_examples/ecot_quali_examples-1.png" />
                   <p style="text-align: center;"><small>Some example ECoT generations. Left and middle are
                       from successful trajectories, while right is from a failed one.</small></p>
                   We also find that the generated reasonings can give qualitative interpretability
-                  insights into why the policy succeeds or fails at a given task. In the left-side example above, the
-                  high-level reasoning and
-                  low-level detections are all correct, leading to a successful trajectory. In the middle example, the
-                  model correctly rephrases the task ("put the leftmost object on the middle object") to be more
-                  specific ("put the pink stuffed animal on the blue towel"); this is an emergent behavior, as we do not
-                  typically train on rephrasings of this type. Finally, in the right-side example, we see that the
-                  policy
-                  incorrectly identifies the hammer as a screwdriver, which explains why the robot wrongly reached
-                  for it.
+                  insights into why the policy succeeds or fails at a given task, such as correctly rephrasing a vague
+                  task to a concrete one or misidentifying relevant scene objects.
+
                 </div>
 
                 <h3 class="title is-4">Human Interventions via Natural Language Corrections</h3>
@@ -344,16 +336,13 @@
                     </div>
                   </div>
                   <p>
-                    Embodied chain-of-thought reasoning open a new approach for human-robot interaction: human operators
+                    Embodied chain-of-thought reasoning opens a new approach for human-robot interaction: human
+                    operators
                     can interpret
                     and debug the robot's "thought process" by issuing natural language hints
                     or corrections, which a large language model (like <a
                       href="https://openai.com/chatgpt/">ChatGPT</a>) can format into an ECoT reasoning text. The ECoT
                     policy can then condition on this fixed reasoning to pick actions.
-                  </p>
-                  <p>
-                    Note that purely instruction-conditioned policies can only have their instruction prompts modified,
-                    meaning ECoT is much less restrictive in the kinds of natural language intervention that it accepts.
                   </p>
                   <img src="static/images/ecot_human_intervention/ecot_human_intervention-1.png" />
                   <p style="text-align: center;"><small>Embodied chain-of-thought reasoning enables policies to accept
@@ -362,6 +351,41 @@
                     Using such interventions, our policy is able to solve tasks it previously failed on. This
                     improvement boosts our policy's performance on difficult tasks beyond that of OpenVLA and RT-2-X,
                     both with or without modified instruction prompts.
+                  </p>
+                </div>
+
+                <h3 class="title is-4">Transfer to Other Robot Embodiments</h3>
+                <div class="content has-text-justified">
+
+                  <img src="static/images/black_bowl.png" />
+                  <p style="text-align: center;"><small>Example of our policy generating reasoning for a novel robot
+                      embodiment.</small></p>
+                  <p>
+                  <p>
+                    Finally, we find that fine-tuning an OpenVLA policy on our ECoT Bridge V2 data <b>allows it to
+                      generalize its reasoning capabilities to other robot as well -- despite not seeing any
+                      reasoning annotations for these other embodiments!</b> We observe that the policy can even produce
+                    highly robot-dependent embodied features, such as the gripper position.
+                  </p>
+
+                  <div class="columns is-vcentered interpolation-panel">
+                    <div class="column  has-text-centered">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/simpler_demos/open_drawer.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                    <div class="column  has-text-centered">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/simpler_demos/sponge.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+
+                  <p>
+                    Said policy can likewise perform reasoning to complete tasks on a virtual Google Robot platform in
+                    the <a href="https://simpler-env.github.io/">SIMPLER</a> simulated robot evaluation environment.
+                    Based on these findings, we believe embodied chain-of-thought to be a promising recipe for scaling
+                    and transfering robot reasoning capabilities.
                   </p>
                 </div>
 
@@ -396,7 +420,8 @@ Example Code
           <h2 class="title">BibTeX</h2>
           <pre><code> @article{Zawalski24-ecot,
             title={Robotic Control via Embodied Chain-of-Thought Reasoning},
-            author={Zawalski, Michał and Chen, William and Pertsch, Karl and Mees, Oier and Finn, Chelsea and Levine, Sergey},
+            author={Zawalski, Michał and Chen, William and Pertsch, Karl and Mees, Oier 
+                and Finn, Chelsea and Levine, Sergey},
             year={2024}
           } </code></pre>
         </div>
